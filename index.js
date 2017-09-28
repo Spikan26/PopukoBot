@@ -32,7 +32,7 @@ bot.on("message", function (message) {
 });
 
 //connecte le bon bot
-bot.login(TOKEN)
+bot.login(process.env.BOT_TOKEN)
 
 //const emojiList = bot.emojis.map(e=>e.toString()).join("#");			//message.guild.emojis.map(e=>e.toString()).join("#");
 	//	var ListEmoji = emojiList.split("#");
