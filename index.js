@@ -1,6 +1,5 @@
 const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
 
-const TOKEN = "MzYwMzUxNjA1MTYzMjk0NzIx.DKUWfA.R4CeKMeGxrEQ5cJs4hH2GddhvmY"; //Token du Bot, ça sert à l'identifier
 const PREFIX = "::";	//Ce qu'il y a au début de la commande, exemple ici : "-:ping"
 
 
