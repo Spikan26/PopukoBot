@@ -1,7 +1,7 @@
 const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
 
 const PREFIX = "::";	//Ce qu'il y a au début de la commande, exemple ici : "-:ping"
-
+const PREFIXCOMMAND = "//";
 
 var bot = new Discord.Client(); // C'est pour dire que le bot est comme un utilisateur au serveur (normalement c'est ça, je sais plus, mais c'est obligatoire en gros, cherche pas xD)
 
@@ -10,12 +10,28 @@ var bot = new Discord.Client(); // C'est pour dire que le bot est comme un utili
 bot.on("ready", function () {
     console.log("Ready")
 	bot.user.setGame(":: + emoji's name");
+	bot.user.setStatus("online");
 })
 
 
 bot.on("message", function (message) {
     //ignore son propre message (i guess ? c'est dur d'expliquer)
     if (message.author.equals(bot.user)) return;
+	
+	if (message.content.startsWith(PREFIX2)){
+		var args = message.content.substring(PREFIX2.length).split(" ");
+
+		switch (args[0].toLowerCase()) {			
+			case "random":
+				const emojiList = bot.emojis.map(e=>e.toString()).join("#");
+				var ListEmoji = emojiList.split("#");
+				randemo = Math.floor((Math.random() * ListEmoji.length));
+				message.delete();
+				message.reply(ListEmoji[randemo]);
+				break
+		}
+	}
+	
 
     //Si ne commence pas par le PREFIX, ignore
     if (!message.content.startsWith(PREFIX)) return;
