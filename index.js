@@ -18,8 +18,8 @@ bot.on("message", function (message) {
     //ignore son propre message (i guess ? c'est dur d'expliquer)
     if (message.author.equals(bot.user)) return;
 	
-	if (message.content.startsWith(PREFIX2)){
-		var args = message.content.substring(PREFIX2.length).split(" ");
+	if (message.content.startsWith(PREFIXCOMMAND)){
+		var args = message.content.substring(PREFIXCOMMAND.length).split(" ");
 
 		switch (args[0].toLowerCase()) {			
 			case "random":
