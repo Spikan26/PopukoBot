@@ -9,7 +9,7 @@ var bot = new Discord.Client(); // C'est pour dire que le bot est comme un utili
 //ecrit dans la console quand le bot est pret
 bot.on("ready", function () {
     console.log("Ready")
-	bot.user.setGame(":: + emoji's name");
+	bot.user.setGame("//help");
 	bot.user.setStatus("online");
 })
 
@@ -26,8 +26,23 @@ bot.on("message", function (message) {
 		var pageTot = Math.floor(ListEmoji.length / 25);
 		
 		switch (args[0].toLowerCase()) {		//commands with // prefix	
+			case "help":
+				if (!args[1])
+				{
+					message.channel.send("List of commands : `//random`, `//list`");
+					message.channel.send("Normal Usage : `::[name of the emoji]`	(example : `::citron`)")
+					return;
+				}
+				else if (args[1] == "random" || args[1] == "//random")
+				{
+					message.channel.send("`//random`, post a random emoji")
+				}
+				else if (args[1] == "list" || args[1] == "//list")
+				{
+					message.channel.send("`//list [n° of the page]`, Show a list of the emoji")
+				}
+				break
 			case "random":
-				
 				randemo = Math.floor((Math.random() * ListEmoji.length));
 				message.delete();
 				message.reply(ListEmoji[randemo]);
