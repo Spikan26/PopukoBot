@@ -23,6 +23,7 @@ bot.on("message", function (message) {
 		
 		const emojiList = bot.emojis.map(e=>e.toString()).join("#");
 		var ListEmoji = emojiList.split("#");
+		var pageTot = Math.floor(ListEmoji.length / 25);
 		
 		switch (args[0].toLowerCase()) {		//commands with // prefix	
 			case "random":
