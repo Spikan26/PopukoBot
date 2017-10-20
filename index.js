@@ -42,7 +42,7 @@ bot.on("message", function (message) {
 				}
 				message.delete();
 				const embed = new Discord.RichEmbed()
-				var limit = 24;
+				var limit = 24 + (24 * currentPage);
 				if(ListEmoji.length - (25 * currentPage) < 25) limit = ListEmoji.length;
 					for(var i=(24 * currentPage);i<limit; i++){
 						var testemoji = ListEmoji[i];
