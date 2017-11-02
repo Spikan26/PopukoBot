@@ -29,7 +29,7 @@ bot.on("message", function (message) {
 			case "help":
 				if (!args[1])
 				{
-					message.channel.send("List of commands : `//random`, `//list`");
+					message.channel.send("List of commands : `//random`, `//list`, `//large`");
 					message.channel.send("Normal Usage : `::[name of the emoji]`	(example : `::citron`)")
 					return;
 				}
@@ -40,6 +40,10 @@ bot.on("message", function (message) {
 				else if (args[1] == "list" || args[1] == "//list")
 				{
 					message.channel.send("`//list [n° of the page]`, Show a list of the emoji")
+				}
+				else if (args[1] == "large" || args[1] == "//large")
+				{
+					message.channel.send("`//large [name of the emoji]`, Show a largest version of the emoji")
 				}
 				break
 			case "random":
@@ -68,7 +72,19 @@ bot.on("message", function (message) {
 				message.channel.send({ embed});
 				message.channel.send("Page " + (currentPage + 1) + " / " + (pageTot + 1));
 				break
-			}
+			
+			case "large":
+				if (!args[1]) {
+					message.channel.send("No emoji specified");
+					return;
+				}
+				else
+				{
+					var large = bot.emojis.findKey("name", args[1]);
+					message.channel.send("https://cdn.discordapp.com/emojis/" + large + ".png");
+				}
+				break
+		}
 	}
 	
 
