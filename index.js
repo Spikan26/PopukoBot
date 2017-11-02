@@ -81,7 +81,14 @@ bot.on("message", function (message) {
 				else
 				{
 					var large = bot.emojis.findKey("name", args[1]);
-					message.channel.send("https://cdn.discordapp.com/emojis/" + large + ".png");
+					if (large != null)
+					{
+						message.channel.send("https://cdn.discordapp.com/emojis/" + large + ".png");
+					}
+					else
+					{
+						message.channel.send("Emoji not found");
+					}
 				}
 				break
 		}
