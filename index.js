@@ -83,7 +83,8 @@ bot.on("message", function (message) {
 					var large = bot.emojis.findKey("name", args[1]);
 					if (large != null)
 					{
-						message.channel.send("https://cdn.discordapp.com/emojis/" + large + ".png");
+						message.delete();
+						message.reply("https://cdn.discordapp.com/emojis/" + large + ".png");
 					}
 					else
 					{
