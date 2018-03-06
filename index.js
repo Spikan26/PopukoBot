@@ -1,9 +1,29 @@
-﻿const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
+﻿//////////////////////////////////////////
+///		POPUKO BOT
+//////////////////////////////////////////
+
+const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
+
+var fs = require("fs");
 
 const PREFIX = "::";	//Ce qu'il y a au début de la commande, exemple ici : "-:ping"
 const PREFIXCOMMAND = "//";
+const PREFIX_SOUND = "mak.";
 
 var bot = new Discord.Client(); // C'est pour dire que le bot est comme un utilisateur au serveur (normalement c'est ça, je sais plus, mais c'est obligatoire en gros, cherche pas xD)
+
+var file = "";
+var helpmsg = "";
+
+fs.readdir("MP3", function(err, folder) {
+ 
+	for (var i=0; i<folder.length; i++) {
+		const wextend = folder[i];		//wextend = with extend (exemple.wav)
+		file = wextend.split(".");	//file = [exemple, wav]
+		helpmsg += file[0];
+		helpmsg += "	";
+	}
+});
 
 
 //ecrit dans la console quand le bot est pret
@@ -22,7 +42,7 @@ bot.on("message", function (message) {
 		var args = message.content.substring(PREFIXCOMMAND.length).split(" ");
 		
 		const emojiList = bot.emojis.map(e=>e.toString()).join("#");
-		var ListEmoji = emojiList.split("#");
+		var ListEmoji = emojiList.split("#");			
 		var pageTot = Math.floor(ListEmoji.length / 25);
 		
 		switch (args[0].toLowerCase()) {		//commands with // prefix	
@@ -63,7 +83,7 @@ bot.on("message", function (message) {
 				const embed = new Discord.RichEmbed()
 				var limit = 24 + (24 * currentPage);
 				if(ListEmoji.length - (25 * currentPage) < 25) limit = ListEmoji.length;
-					for(var i=(24 * currentPage);i<limit; i++){
+					for(var i=(24 * currentPage);i<limit; i++){	
 						var testemoji = ListEmoji[i];
 						embed.addField(testemoji,
 							ListEmoji[i+1], true)
@@ -94,6 +114,41 @@ bot.on("message", function (message) {
 				break
 		}
 	}
+	
+	
+	
+	if (!message.guild) return;
+	if (message.content.toLowerCase().startsWith(PREFIX_SOUND)){
+		
+		var args = message.content.substring(PREFIX_SOUND.length).split(" ");
+
+		if (args[0] == "help"){
+			message.channel.send(helpmsg);
+		}
+		else if (message.guild.voiceConnection){
+			return;
+		}
+		else {
+			split = helpmsg.split("	");
+			search = split.find(function(str) {
+									return str == args[0];
+								});
+			if (search != undefined){
+				if (message.member.voiceChannel) {
+					message.member.voiceChannel.join()
+					.then(connection => { // Connection is an instance of VoiceConnection
+						message.delete();
+						const dispatcher = connection.playFile('C:/Users/alexa/Desktop/TheFamily/MakSound/MP3/'+args[0]+'.wav');
+						dispatcher.on('end', () => message.member.voiceChannel.leave());
+					})
+				.catch(console.log);
+				} else {
+					message.reply('You need to join a voice channel first!');
+				}
+			}
+		}
+	}
+	
 	
 
     //Si ne commence pas par le PREFIX, ignore
