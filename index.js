@@ -138,7 +138,7 @@ bot.on("message", function (message) {
 					message.member.voiceChannel.join()
 					.then(connection => { // Connection is an instance of VoiceConnection
 						message.delete();
-						const dispatcher = connection.playFile('C:/Users/alexa/Desktop/TheFamily/MakSound/MP3/'+args[0]+'.wav');
+						const dispatcher = connection.playFile('MP3/'+args[0]+'.wav');
 						dispatcher.on('end', () => message.member.voiceChannel.leave());
 					})
 				.catch(console.log);
