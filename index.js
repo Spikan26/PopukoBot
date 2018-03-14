@@ -164,5 +164,5 @@ bot.on("message", function (message) {
 	}
 });
 
-//connecte le bon bot
+//connecte le bon bot.
 bot.login(process.env.BOT_TOKEN)
