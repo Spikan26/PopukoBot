@@ -1,5 +1,5 @@
 ﻿//////////////////////////////////////////
-///		POPUKO BOT
+///		POPUKO BOT (with new emojis)
 //////////////////////////////////////////
 
 const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
